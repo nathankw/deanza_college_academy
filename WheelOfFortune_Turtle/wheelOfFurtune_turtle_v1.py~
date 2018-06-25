@@ -1,0 +1,53 @@
+#!/usr/bin/env python3    
+    
+###    
+# Nathaniel Watson    
+# 2018-06-22   
+# De Anza College Academy    
+### 
+
+import turtle as t
+
+FONT = ("Arial", 60, "normal")
+word = "hello"
+display = ["_"] * len(word)
+t.write(" ".join(display), align="center", font=FONT)
+    
+while True:
+    user_letter = input("Choose a letter: ")
+    user_letter = user_letter.lower()
+    for index in range(len(word)):
+        letter = word[index]
+        if letter == user_letter:
+            display[index] = letter
+    # Clear the drawing and show the updated word
+    t.clear()
+    t.write(" ".join(display), align="center", font=FONT)
+
+    # Check if all letters have been identified
+    if "_" not in display:
+    	# Then all the letters have been found. Game over!
+    	print("Congratulations! You finished solving the puzzle in _ turns")
+    	break
+    
+	
+	
+# 1. The turtle is in the way in the puzzle. Hide the turtle so that just the
+#    puzzle is visible. 
+#
+# 1. Update the last print statement so that it prints the number of turns instead
+#    of the placeholder of "_". Keep track of the number of turns in a new variable
+#    called "turns". 
+#
+# 2. Add a feature that allows the user to solve the puzzle. 
+#    Hint: change the input line to be 
+#
+#        user_letter = input("Choose a letter, or type the word to solve: ")
+#
+#    Next, you need to add a check to see if the user entered a single letter, 
+#    or more than one letter (a word). If a word was entered, then check if that 
+#    word equals the game puzzle's word. If they match, then congratulate the 
+#    user and end the game. 
+#
+
+ 

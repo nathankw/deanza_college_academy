@@ -1,0 +1,22 @@
+Colors
+
+Color picker at https://www.w3schools.com/colors/colors_rgb.asp
+
+1) What is the RGB value for pink?  And for orange?
+2) Write a program that stores the RGB values for the following colors:
+
+  black
+  blue
+  green
+  orange
+  pink
+  purple
+  red
+  white
+  yellow
+  
+  Use a dictionary to store the key and value pairs. You program should ask the
+  user what the RGB value is for a given color using the "input" function. Use
+  the "print" function to indicate the RGB value to the user.
+  
+  
