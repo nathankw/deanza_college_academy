@@ -98,6 +98,8 @@ def start_game():
                 print("You loose :<(  Too many wrong guesses. The word was {}.".format(puzzle))
                 break
         else:
+            # The user letter is in the puzzle. Update the puzzle to show the user letter
+            # in all places that it should appear:
             for index in range(len(puzzle)):
                 letter = puzzle[index]
                 if letter == user_letter:
