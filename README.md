@@ -1,6 +1,6 @@
 # de_anza_college_academy_2018
 
-Class Log [here](https://docs.google.com/document/d/1vyFI66rkRIixba9enwdZKUSwdbH3ACNto9MBC-maNqE/edit?usp=sharing).
+Class Log [here](https://docs.google.com/document/d/1ZMQ5Qu4aFP-SwrtqTP9D8cHnpiFdg_Ibylf5xcm33gY/edit?usp=sharing).
 
 The ``tic_tac_toe.py`` script demonstrates how one can do GUI development in Python. This uses the tkinter library to create a fun and educational tic tac toe game, which can be used as a basis for teaching students GUI development, debugging, and contributing to create new or enhancement features. 
 
