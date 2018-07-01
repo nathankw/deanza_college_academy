@@ -34,42 +34,43 @@ def house(n):
     Raises:
         ValueError: The value of parameter n is too small (< 10).
     """
-    if n < 10:
-       raise ValueError("n must be >= 10.")
+#    if n < 10:
+#       raise ValueError("n must be >= 10.")
 
-    DOOR_HEIGHT = 3
+    DOOR_HEIGHT = 2
     x, y, z = mc.player.getTilePos()
-    x += 2
+    x += 1 # Don't build over Steve
+
+    #First clear some space:
+    OFFSET = 3
+    mc.setBlocks(x - OFFSET, y, z - OFFSET, x + n + OFFSET, y + n + OFFSET, z + n + OFFSET, AIR)
     mc.setBlocks(x, y, z, x + n, y + n, z + n, COBBLESTONE)
     # Carve out the inside with air blocks.
     mc.setBlocks(x + 1, y, z + 1, x + n - 1, y + n - 1, z + n - 1, AIR)
+#    # Glass roof
+    mc.setBlocks(x, y + n, z, x + n, y + n, z + n, GLASS_PANE)
+#    # Wooden floor
+    mc.setBlocks(x + 1, y -1, z + 1, x + n - 1, y - 1, z + n - 1, WOOD, 15) # 15 is Jungle (only bark)
+#    # Windows all all 4 sides
+    WIN_HEIGHT = y + 1
+#    mc.setBlocks(x, WIN_HEIGHT, z, x + n, WIN_HEIGHT, z, GLASS) # front wall
+#    mc.setBlocks(x, WIN_HEIGHT, z + 1, x, WIN_HEIGHT, z + n, GLASS) # left wall
+#    mc.setBlocks(x + n, WIN_HEIGHT, z, x + n, WIN_HEIGHT, z + n, block.GLASS.id) # right wall
+#    mc.setBlocks(x, WIN_HEIGHT, z + n, x + n, WIN_HEIGHT, z + n, block.GLASS.id) # back wall
     # Make the door
-    mid = x/n
+    mid = n/2
     mc.setBlocks(x + mid - 1, y, z, x + mid + 1, y + DOOR_HEIGHT, z, AIR)
-    # Put torch pointing up above door
-    mc.setBlock(x + mid, y + DOOR_HEIGHT + 1, z - 1, COBBLESTONE)
-    mc.setBlock(x + mid, y + DOOR_HEIGHT + 2, z - 1, block.TORCH.id, 5)
-    # Glass roof
-    mc.setBlocks(x, y, z + n - 1, x + n, y + n, z + n, GLASS_PANE)
-    # Wooden floor
-    mc.setBlocks(x + 1, y, z + 1, x + n - 1, y, z + n - 1, WOOD, 15) # 15 is Jungle (only bark)
-    # Windows all all 4 sides
-    mc.setBlocks(x, y + 2, z, x + n, y + 2, z, GLASS) # front wall
-    mc.setBlocks(x, y + 2, z + 1, x, y + 2, z + n, GLASS) # left wall
-    mc.setBlocks(x + n, y + 2, z, x + n, y + 2, z + n, block.GLASS.id) # right wall
-    mc.setBlocks(x, y + 2, z + n, x + n, y + 2, z + n, block.GLASS.id) # back wall
-    # Bedroom wall
+#    # Bedroom wall
     mc.setBlocks(x + mid, y, z + mid, x + n - 1, y + n - 1, z + mid, COBBLESTONE)
-    # A single, activated TNT block
-    mc.setBlock(x + 2, y, z + 2, TNT, 1)
-    # A pile of activated TNT in the bedroom
-    mc.setBlocks(x + mid + 2, y, z + mid + 2, x + mid + 5, y + mid, z + mid + 5, TNT, 1)
-    # Moat
-    depth = y - 3
-    mc.setBlocks(x - 3, depth, z - 3, x + n + 3, depth, z - 3, WATER) # front side
-    mc.setBlocks(x - 3, depth, z + n + 3, x + n + 3, depth, z + n + 3, WATER) # back side
-    mc.setBlocks(x - 3, depth, z - 2, x - 3, depth, z + n + 2, WATER) # left side
-    mc.setBlocks(x + n + 3, depth, z - 2, x + n + 3, depth, z + n + 2, WATER) # right side
+#    # A single, activated TNT block
+    mc.setBlock(x + 2, y, z + 2, TNT, 1) #    # A pile of activated TNT on the glass roof
+    mc.setBlocks(x + mid, y + n, z + mid, x + n, y + n + 5, z + mid, TNT, 1)
+#    # Moat
+#    depth = y - 3
+#    mc.setBlocks(x - 3, depth, z - 3, x + n + 3, depth, z - 3, WATER) # front side
+#    mc.setBlocks(x - 3, depth, z + n + 3, x + n + 3, depth, z + n + 3, WATER) # back side
+#    mc.setBlocks(x - 3, depth, z - 2, x - 3, depth, z + n + 2, WATER) # left side
+#    mc.setBlocks(x + n + 3, depth, z - 2, x + n + 3, depth, z + n + 2, WATER) # right side
 
 def clear_space(n):
     """
@@ -105,5 +106,16 @@ def player_ids():
     return ids
 
 def move_player(player_id, x, y, z):
-   mc.player.setPos(player_id, x, y, z)
+   mc.entity.setPos(player_id, x, y, z)
     
+def digout(player_id):
+    """
+    Changes the specified player's y reading to -10.
+    Useful if they're misbehaving since they'll need to find a way out.
+    """
+    x, y, z = mc.player.getPos()
+    y -= 10
+    mc.entity.setPos(player_id, x, y, z)
+    mc.setBlocks(x - 1, y, z - 1, x + 1, y, z + 1, AIR)
+    
+
