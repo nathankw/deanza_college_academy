@@ -74,6 +74,8 @@ def house(n):
 
 def clear_space(n):
     """
+    Clears an area n x n x n encircling the player's position.
+
     Args:
         n - `int`. The number of blocks to clear in all directions.
     """
