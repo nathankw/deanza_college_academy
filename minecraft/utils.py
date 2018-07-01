@@ -84,8 +84,7 @@ def clear_space(n):
 
 def dont_hit_blocks(block_types):
     """
-    Any player that hits a one of the forbidden blocks will be teleported into the air to the 
-    highest point.
+    Any player that hits a one of the forbidden blocks will be teleported 64 blocks into the air.
     
     Args:
         block_types: `list` of block IDs not to hit. 
@@ -95,13 +94,13 @@ def dont_hit_blocks(block_types):
         for h in hits:
             pos = h.pos
             block_id = mc.getBlock(*pos)
-            # Check which type of block was hit
+#            # Check which type of block was hit
             if block_id in block_types:
-                # See who hit it
+#                # See who hit it
                 player_id = h.entityId
                 x, y, z = mc.entity.getPos(player_id)
                 # Teleport player into air
-                mc.entity.setPos(x, 64, z) 
+                mc.entity.setPos(player_id, x, 64, z) 
 
 def player_ids():
     ids = mc.getPlayerEntityIds()
