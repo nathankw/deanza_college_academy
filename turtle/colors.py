@@ -13,10 +13,10 @@ This program demonstrates the use of for-loops to create fascinating designs in 
 
 import turtle
 
-ANGLE = 80
+ANGLE = 93
 
 turtle.speed(0) # Fastest
-colors = ["red", "cyan", "teal", "gold", "purple"]
+colors = ["red", "blue", "purple", "orange"]
 color_index = -1
 for i in range(300):
         # The color will change in each iteration of the for-loop.
@@ -27,6 +27,8 @@ for i in range(300):
 	    color_index = -1
 	turtle.forward(i)
 	turtle.left(ANGLE)
+
+input("Done?")
 
 # Q1) What happens when you set ANGLE to 90?  How about 45?
 
