@@ -1,12 +1,13 @@
-###                                                                                                    
-# Nathaniel Watson                                                                                     
-# 2018-06-26                                                                                           
-# De Anza College Academy                                                                              
+###
+# Nathaniel Watson
+# 2018-06-26
+# De Anza College Academy
 ###
 
 """
 See mc API at https://www.stuffaboutcode.com/p/minecraft-api-reference.html.
 """
+import time
 
 from mcpi import block
 from mcpi.minecraft import Minecraft
@@ -24,13 +25,13 @@ WOOD = block.WOOD.id
 def house(n):
     """
     Build a house with equal width, length, and height. There is a door in the middle of the front
-    wall of the house.  The floors are wooden with the Jungle data type setting, and the roof is 
-    also wooden. 
+    wall of the house.  The floors are wooden with the Jungle data type setting, and the roof is
+    also wooden.
 
     Args:
         n: `int`.  Specifies the dimensions of the house to be n x n x n. Due to minimal layout
-          of the house, n should be >= 10 
-  
+          of the house, n should be >= 10
+
     Raises:
         ValueError: The value of parameter n is too small (< 10).
     """
@@ -80,14 +81,27 @@ def clear_space(n):
         n - `int`. The number of blocks to clear in all directions.
     """
     x, y, z = mc.player.getTilePos()
-    mc.setBlocks(x, y, z, x + n, y + n , z + n, AIR)
+    mc.setBlocks(x - n, y, z - n, x + n, y + n , z + n, AIR)
+
+def clear_space_below_too(n):
+    """
+    Same as clear_space() above, but also clears below.
+    And also adds a house!
+
+    Args:
+        n - `int`. The number of blocks to clear in all directions.
+    """
+    x, y, z = mc.player.getTilePos()
+    mc.setBlocks(x - n, y - n, z - n, x + n, y + n , z + n, AIR)
+    if n > 15:
+        house(n - 10)
 
 def dont_hit_blocks(block_types):
     """
     Any player that hits a one of the forbidden blocks will be teleported 64 blocks into the air.
-    
+
     Args:
-        block_types: `list` of block IDs not to hit. 
+        block_types: `list` of block IDs not to hit.
     """
     while True:
         hits = mc.events.pollBlockHits()
@@ -100,7 +114,7 @@ def dont_hit_blocks(block_types):
                 player_id = h.entityId
                 x, y, z = mc.entity.getPos(player_id)
                 # Teleport player into air
-                mc.entity.setPos(player_id, x, 64, z) 
+                mc.entity.setPos(player_id, x, 64, z)
 
 def player_ids():
     ids = mc.getPlayerEntityIds()
@@ -108,15 +122,32 @@ def player_ids():
 
 def move_player(player_id, x, y, z):
    mc.entity.setPos(player_id, x, y, z)
-    
+
 def digout(player_id):
     """
     Changes the specified player's y reading to -10.
     Useful if they're misbehaving since they'll need to find a way out.
     """
     x, y, z = mc.player.getPos()
-    y -= 10
+    y = -10
     mc.entity.setPos(player_id, x, y, z)
     mc.setBlocks(x - 1, y, z - 1, x + 1, y, z + 1, AIR)
-    
 
+def trailing_blocks(block_id, data_values=[]):
+    """
+    Anywhere the player goes, a block of the given ID will be placed
+    at the player's current position.
+    """
+    while True:
+        x, y, z = mc.player.getTilePos()
+        mc.setBlock(x, y, z, block_id, *data_values)
+        #time.sleep(0.1)
+
+def trailing_blocks_delay(block_id, data_values=[]):
+    """
+    Same as trailing_blocks() above, but adds a 0.3s delay.
+    """
+    while True:
+        x, y, z = mc.player.getTilePos()
+        mc.setBlock(x, y, z, block_id, *data_values)
+        time.sleep(0.3)
