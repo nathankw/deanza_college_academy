@@ -1,26 +1,15 @@
+import re
+
+reg = re.compile(r'(cag)+')
 
 
-def count_cag(seq):
-    cag = "cag"
-    prev = ""
-    cag_count = 0
-    max_cag_count = 0
-    seq = seq.lower()
-    for codon_start in range(0, len(seq), 3):
-        codon = seq[codon_start:codon_start + 3]
-        print(codon)
-        if codon == cag:
-            if prev == cag:
-                cag_count += 1
-                if cag_count > max_cag_count:
-                    max_cag_count = cag_count
-            else:
-                prev = cag
-                cag_count = 1
-        else:
-            cag_count = 0
-            prev = ""
-    return max_cag_count
-            
-            
-        
+def calc_repeat_frequency(sequence):
+    sequence = sequence.lower()
+    places = list(reg.finditer(sequence))
+    max_times_repeated = 0
+    for p in places:
+        times_repeated = (p.end() - p.start())/3.0 # 3 is the length of "cag"
+        if times_repeated > max_times_repeated:
+            max_times_repeated = times_repeated
+    return max_times_repeated
+
