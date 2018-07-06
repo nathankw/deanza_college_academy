@@ -21,7 +21,7 @@ to create a distribution that tabulates the count that each baby name was seen i
 program also shows how to report the baby name with the greatest count.
 """
 
-
+import operator
 import os
 
 # Change to thumbdrive (assuming plugged in and set to drive D):
@@ -43,13 +43,21 @@ for line in f:
         d[line] = 1
 
 # Calculate the most popular baby name:
-max_freq = 0
-max_name = ""
-for name in d:
-    freq = d[name]
-    if freq > max_freq:
-        max_freq = freq
-        max_name = name
+def okay_solution(names)
+    max_freq = 0
+    max_name = ""
+    for name in d:
+        freq = d[name]
+        if freq > max_freq:
+            max_freq = freq
+            max_name = name
+
+def better_solution(names):
+    sorted_items = sorted(names, key=operator.itemgetter(1), reverse=True)
+    return sorted_items[0]
+    
+max_name, max_freq = okay_solution(names=d) 
+max_name, max_freq = better_solution(names=d)
 print("The most popular name is: {} at a count of {}.".format(max_name, max_freq))
 # For girls file, should get "The most popular name is: Serenity at a count of 20."
 # For boys file, should get "The most popular name is: Elijah at a count of 18."
