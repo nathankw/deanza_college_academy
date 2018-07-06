@@ -23,7 +23,7 @@ program also shows how to report the baby name with the greatest count.
 
 import operator
 import os
-
+import pdb
 # Change to thumbdrive (assuming plugged in and set to drive D):
 # os.chdir("D:")
 
@@ -43,7 +43,7 @@ for line in f:
         d[line] = 1
 
 # Calculate the most popular baby name:
-def okay_solution(names)
+def okay_solution(names):
     max_freq = 0
     max_name = ""
     for name in d:
@@ -53,10 +53,11 @@ def okay_solution(names)
             max_name = name
 
 def better_solution(names):
+    names = names.items()
     sorted_items = sorted(names, key=operator.itemgetter(1), reverse=True)
     return sorted_items[0]
     
-max_name, max_freq = okay_solution(names=d) 
+#max_name, max_freq = okay_solution(names=d) 
 max_name, max_freq = better_solution(names=d)
 print("The most popular name is: {} at a count of {}.".format(max_name, max_freq))
 # For girls file, should get "The most popular name is: Serenity at a count of 20."
