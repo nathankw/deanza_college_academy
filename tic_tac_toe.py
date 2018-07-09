@@ -17,7 +17,7 @@ import time
 from tkinter import *          
 from tkinter.messagebox import showinfo, askyesno
 
-import de_anza_college_academy_2018
+#import de_anza_college_academy_2018
 
 root = Tk()
 root.title("Lets Play Tic-tac-toe!")
@@ -26,11 +26,11 @@ def make_modal(widget):
     widget.focus_set()
     widget.grab_set()
     widget.wait_window()
-    return widget
 
 
 class Board:
-    IMAGES_PATH = de_anza_college_academy_2018.IMAGES_PATH
+    #IMAGES_PATH = de_anza_college_academy_2018.IMAGES_PATH
+    IMAGES_PATH = "assets/images"
 
     DEFAULT_PIECE = 0
     X_PIECE = 1
@@ -134,7 +134,7 @@ class Board:
 
         # A Button's 'state' can be NORMAL/ACTIVE/DISABLED.
         self.start_btn.config(state=DISABLED)
-        tl = make_modal(tl)
+        make_modal(tl)
 
     def _set_player_piece(self, event, selection):
         # Player 1 is designated to be the one that selects their piece.

@@ -7,7 +7,7 @@
 ###
 
 """
-Generates random, colorful dots in turtle.
+Howdy
 """
 
 import random
@@ -27,6 +27,15 @@ def set_bg_col():
 def set_pen_col():
     rgb, hex_val = askcolor()
     t.pencolor(hex_val)
+
+def save():
+    """
+    Saves the canvas to a Postscript file.
+    """
+    c = t.getcanvas(filename)
+    if not filename.endswith(".ps"):
+        filename += ".ps"
+    c.postscript(file=filename)
     
 #bg_btn = Button(text="Set background color", command=set_bg_col)
 #bg_btn.pack()
