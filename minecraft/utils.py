@@ -8,6 +8,7 @@
 See mc API at https://www.stuffaboutcode.com/p/minecraft-api-reference.html.
 """
 import time
+import turtle
 
 from mcpi import block
 from mcpi.minecraft import Minecraft
@@ -22,7 +23,7 @@ TNT = block.TNT.id
 WATER = block.WATER.id
 WOOD = block.WOOD.id
 
-def house(n):
+def house(n=10):
     """
     Build a house with equal width, length, and height. There is a door in the middle of the front
     wall of the house.  The floors are wooden with the Jungle data type setting, and the roof is
@@ -72,6 +73,8 @@ def house(n):
 #    mc.setBlocks(x - 3, depth, z + n + 3, x + n + 3, depth, z + n + 3, WATER) # back side
 #    mc.setBlocks(x - 3, depth, z - 2, x - 3, depth, z + n + 2, WATER) # left side
 #    mc.setBlocks(x + n + 3, depth, z - 2, x + n + 3, depth, z + n + 2, WATER) # right side
+
+turtle.onkey(house, "h")
 
 def clear_space(n):
     """
@@ -151,3 +154,8 @@ def trailing_blocks_delay(block_id, data_values=[]):
         x, y, z = mc.player.getTilePos()
         mc.setBlock(x, y, z, block_id, *data_values)
         time.sleep(0.3)
+
+#def tunnel_man():
+#     x, y, z = mc.player.getPos()
+     
+turtle.listen()
