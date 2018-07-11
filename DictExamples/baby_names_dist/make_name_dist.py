@@ -23,7 +23,6 @@ program also shows how to report the baby name with the greatest count.
 
 import operator
 import os
-import pdb
 # Change to thumbdrive (assuming plugged in and set to drive D):
 # os.chdir("D:")
 
@@ -55,6 +54,7 @@ def okay_solution(names):
 def better_solution(names):
     names = names.items()
     sorted_items = sorted(names, key=operator.itemgetter(1), reverse=True)
+    print(sorted_items)
     return sorted_items[0]
     
 #max_name, max_freq = okay_solution(names=d) 
