@@ -21,6 +21,10 @@ you are modeling. In our case, we are making dogs, and each dog will have a name
 
 Objects that you create from a class are formally called instances.
 Functions defined in a class are formally called methods. 
+
+You'll notice that I use the argument self in all of the methods below. That's
+because self represents your dog instance when creating a new dog, or when calling methods on
+an existing dog - don't omit it!
 """
 
 class Dog():
