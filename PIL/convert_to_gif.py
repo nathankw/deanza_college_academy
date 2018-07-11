@@ -27,7 +27,7 @@ def main():
     pic = Image.open(infile)
     outfile_name = os.path.splitext(infile)[0] + ".gif"
     print(outfile_name)
-    pic.save(outfile_name)
+    pic.save(outfile_name, "gif")
     print("Created {}.".format(outfile_name))
 
 if __name__ == "__main__":
