@@ -35,4 +35,4 @@ def random_dots():
         t.update()
         #time.sleep(0.09)
 
-#random_dots()
+random_dots()
