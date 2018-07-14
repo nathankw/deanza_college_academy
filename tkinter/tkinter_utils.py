@@ -48,7 +48,7 @@ def set_bgpic_garfield(event):
     """
     Sets a background picture of Garfield.
     """
-    t.bgpic("Garfield-the-cat_thumb_300.gif")
+    t.bgpic("garfield_300px.gif ")
 
 def set_bgpic_nature(event):
     """
